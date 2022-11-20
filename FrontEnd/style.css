@@ -10,7 +10,7 @@ html {
 }
 
 .header-my {
-    background: url("./wp3.jpg") no-repeat center;
+    background: url("./wp1.jpg") no-repeat center;
     height: 100vh;
     color: #fff;
     min-height: 500px;
@@ -109,5 +109,8 @@ th {
     font-size: 20px;
     color: green;
     font: 400;
-    display: none;
+}
+
+#myDIV{
+    color: white;
 }

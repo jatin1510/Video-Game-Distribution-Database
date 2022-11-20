@@ -13,7 +13,7 @@ console.log(user_password);
 
 const insertData = async (query) =>
 {
-    // console.log(query);
+    console.log(query);
     await fetch(`http://localhost:3030/query`, {
         method: "POST",
         headers: {
@@ -26,9 +26,8 @@ const insertData = async (query) =>
         {
             if (result2.err) {
                 const body = document.body;
-                console.log("Not");
                 body.appendChild(
-                    document.createTextNode("Not login.")
+                    document.createTextNode("Wrong Credentials")
                 );
             } else {
                 // Check if >= 2 or Zero entries are there then print error
@@ -129,10 +128,15 @@ const fetchTable = async (query, table_div, table_data) =>
 
 function show()
 {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    console.log('call ho to raha hai');
+    const x = document.getElementById("myDIV");
+    console.log(x.style.color);
+    if (x.style.color == "white") {
+        
+        x.style.color = 'green';
+        console.log(x.style.color);
     } else {
-        x.style.display = "none";
+        x.style.display = 'none';
+        console.log(x.style.display);
     }
 }

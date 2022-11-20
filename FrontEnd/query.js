@@ -1,3 +1,4 @@
+
 const fetchTable = async (query) => {
     // const data = {
     //     query: "SELECT table_name FROM information_schema.tables WHERE table_schema='video_game_db' AND table_type='BASE TABLE';",
@@ -55,3 +56,8 @@ const showData = () => {
     console.log(select_menu_value);
     fetchTable(select_menu_value);
 };
+
+let q = `set search_path to "video_game_db"`;
+fetchTable(q);
+q = `set datestyle = euro`;
+fetchTable(q);
