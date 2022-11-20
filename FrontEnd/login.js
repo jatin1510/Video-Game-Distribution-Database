@@ -23,9 +23,8 @@ const insertData = async (query) => {
         .then((result2) => {
             if (result2.err) {
                 const body = document.body;
-                console.log("Not");
                 body.appendChild(
-                    document.createTextNode("Not login.")
+                    document.createTextNode("Wrong Credentials")
                 );
             } else {
                 // Check if >= 2 or Zero entries are there then print error

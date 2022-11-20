@@ -109,7 +109,30 @@ th {
     font-size: 20px;
     color: green;
     font: 400;
-    display: none;
+}
+
+#myDIV{
+    color: white;
+}
+
+.todo {
+    padding-bottom: 70px;
+    margin-right: 850px;
+}
+
+#user_id {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.bglogin{
+    background: url("./wp9.jpg") no-repeat;
+    height: 100vh;
+    color: #fff;
+    min-height: 500px;
+    background-size: cover;
 }
 
 .todo {
