@@ -89,6 +89,9 @@ const deleteFromPlayer = () =>
     user_id.setAttribute("id", "user_id");
     user_id.setAttribute("placeholder", "Player_ID");
     div.appendChild(user_id)
+    document.getElementById("user_id").style.padding ="5px 5px";
+    document.getElementById("user_id").style.margin = "8px 0";
+    document.getElementById("user_id").style.width = "40%";
 
     var btn = document.createElement('button');
     btn.setAttribute('id','delete_player');
@@ -116,6 +119,9 @@ const deleteFromGame = () => {
     user_id.setAttribute("id", "user_id");
     user_id.setAttribute("placeholder", "Game_ID");
     div.appendChild(user_id)
+    document.getElementById("user_id").style.padding ="5px 5px";
+    document.getElementById("user_id").style.margin = "8px 0";
+    document.getElementById("user_id").style.width = "40%";
 
     var btn = document.createElement('button');
     btn.setAttribute('id','delete_game');

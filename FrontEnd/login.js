@@ -1,6 +1,5 @@
 var user_name, user_password, query;
-const login = async () =>
-{
+const login = async () => {
     user_name = document.getElementById("form3Example3").value;
     user_password = document.getElementById("form3Example4").value;
     query = `SELECT * FROM "video_game_db"."Player" WHERE "Player_ID"='${user_name}' AND "Password"='${user_password}'`;
@@ -11,8 +10,7 @@ const login = async () =>
 console.log(user_name);
 console.log(user_password);
 
-const insertData = async (query) =>
-{
+const insertData = async (query) => {
     // console.log(query);
     await fetch(`http://localhost:3030/query`, {
         method: "POST",
@@ -22,8 +20,7 @@ const insertData = async (query) =>
         body: JSON.stringify({ query: query }),
     })
         .then((res) => res.json())
-        .then((result2) =>
-        {
+        .then((result2) => {
             if (result2.err) {
                 const body = document.body;
                 console.log("Not");
@@ -36,7 +33,7 @@ const insertData = async (query) =>
 
                 if (result2.data.rowCount == 1) {
                     // console.log("Logged In successfully");
-                    show();
+                    green();
                     let q = `SELECT "F_Name", "L_Name", "DOB", "Email_ID", "Wallet" FROM "video_game_db"."Player" WHERE "Player_ID" = '${user_name}';`;
                     fetchTable(q, "mydiv7", "tabledata7");
 
@@ -51,16 +48,18 @@ const insertData = async (query) =>
                     let q3 = `SELECT "Season_No", "Reward_Amount", "Game_ID", "Game_Name", "Date_Rewarded"  FROM "video_game_db"."Season_Rewards" NATURAL JOIN "video_game_db"."Game" WHERE "Player_ID" = '${user_name}';`;
                     fetchTable(q3, "mydiv6", "tabledata6");
                 }
+
+                else {
+                    red();
+                }
             }
         })
-        .catch((err) =>
-        {
+        .catch((err) => {
             console.log(err);
         });
 };
 
-const fetchTable = async (query, table_div, table_data) =>
-{
+const fetchTable = async (query, table_div, table_data) => {
     const data = {
         query: "SELECT table_name FROM information_schema.tables WHERE table_schema='video_game_db' AND table_type='BASE TABLE';",
     };
@@ -72,8 +71,7 @@ const fetchTable = async (query, table_div, table_data) =>
         body: JSON.stringify({ query: query }),
     })
         .then((res) => res.json())
-        .then((result2) =>
-        {
+        .then((result2) => {
             //console.log(result2);
             if (result2.err) {
                 const body = document.getElementById(`${table_div}`);
@@ -109,8 +107,7 @@ const fetchTable = async (query, table_div, table_data) =>
             }
             body.appendChild(table);
         })
-        .catch((err) =>
-        {
+        .catch((err) => {
             console.log(err);
         });
 };
@@ -127,12 +124,15 @@ const fetchTable = async (query, table_div, table_data) =>
 // let q3 = `SELECT * FROM "video_game_db"."Season_Rewards" WHERE "Player_ID" = ${user_name};`;
 // fetchTable(q3, "mydiv6", "tabledata6");
 
-function show()
-{
+function green() {
     var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    x.innerHTML = "User Logged in Successfully!";
+    x.style.color = "green";
 }
+
+function red() {
+    var x = document.getElementById("myDIV");
+    x.innerHTML = "Invalid Credentials!";
+    x.style.color = "red";
+}
+
