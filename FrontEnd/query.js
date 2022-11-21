@@ -3,7 +3,7 @@ const fetchTable = async (query) => {
     // const data = {
     //     query: "SELECT table_name FROM information_schema.tables WHERE table_schema='video_game_db' AND table_type='BASE TABLE';",
     // };
-    fetch(`http://localhost:3030/query`, {
+    await fetch(`http://localhost:3030/query`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
