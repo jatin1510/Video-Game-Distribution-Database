@@ -83,6 +83,66 @@ const fetchTable = async (table_name, table_div, table_data) =>
   }
 };
 
-fetchTable("Discount", "mydiv1", "tabledata1");
-fetchTable("Tournament", "mydiv2", "tabledata2");
-fetchTable("Season_Rewards", "mydiv3", "tabledata3");
+const fetchTable2 = async (query, table_div, table_data) =>
+{
+  const data = {
+    query: "SELECT table_name FROM information_schema.tables WHERE table_schema='video_game_db' AND table_type='BASE TABLE';",
+  };
+  fetch(`http://localhost:3030/query`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: query }),
+  })
+    .then((res) => res.json())
+    .then((result2) =>
+    {
+      //console.log(result2);
+      if (result2.err) {
+        const body = document.getElementById(`${table_div}`);
+        // body.appendChild(
+        //     document.createTextNode(JSON.stringify(result2.data))
+        // );
+        return;
+      }
+      const result = result2.data;
+      let t = document.getElementById(`${table_data}`);
+      t.remove();
+      const body = document.getElementById(`${table_div}`);
+      var table = document.createElement("table");
+      table.setAttribute("id", `${table_data}`);
+      // head
+      let thead = table.createTHead();
+      let row = thead.insertRow();
+      for (let i = 0; i < result.fields.length; ++i) {
+        let key = result.fields[i].name;
+        let th = document.createElement("th");
+        let text = document.createTextNode(key);
+        th.appendChild(text);
+        row.appendChild(th);
+      }
+      // data insert
+      for (let element of result.rows) {
+        let row = table.insertRow();
+        for (key in element) {
+
+          let cell = row.insertCell();
+          let text = document.createTextNode(element[key]);
+          cell.appendChild(text);
+        }
+      }
+      body.appendChild(table);
+    })
+    .catch((err) =>
+    {
+      console.log(err);
+    });
+};
+
+let q1 = `select "Game_ID", "Game_Name", "Discount_ID", "Percentage" ,"Start_Date", "End_Date" from "Discount" NATURAL JOIN "Game"`;
+fetchTable2(q1, "mydiv1", "tabledata1");
+let q2 = `SELECT "Tournament_ID", "Tournament_Name", "Game_Name", "Start_Date", "End_Date" FROM "Game" NATURAL JOIN "Tournament"`;
+fetchTable2(q2, "mydiv2", "tabledata2");
+let q3 = `SELECT "Game_Name", "Season_No", "F_Name", "L_Name", "Reward_Amount", "Date_Rewarded" FROM ("Season_Rewards" NATURAL JOIN "Game") NATURAL JOIN "Player";`;
+fetchTable2(q3, "mydiv3", "tabledata3");
