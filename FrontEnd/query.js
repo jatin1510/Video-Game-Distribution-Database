@@ -14,10 +14,6 @@ const fetchTable = async (query) => {
         .then((result2) => {
             console.log(result2);
             if (result2.err) {
-                const body = document.getElementById("my-div");
-                // body.appendChild(
-                //     document.createTextNode(JSON.stringify(result2.data))
-                // );
                 return;
             }
             const result = result2.data;
