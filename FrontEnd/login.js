@@ -321,7 +321,7 @@ function red() {
 }
 
 const logout = () => {
-    location.href = "/index.html";
+    location.href = "./index.html";
 }
 
 const shop = () => {
